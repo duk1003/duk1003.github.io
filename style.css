@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#wrap{
+    width: 100%;
+    position: relative;
+}
+
+#header{
+    width: 100%;
+    background-color: #f3f3f3;
+    z-index: 1000;
+    position: relative;
+}
+#header .logo{
+    width: 50%;
+}
+#header .logo a{
+    padding: 30px;
+    display: inline-block;
+}
