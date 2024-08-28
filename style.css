@@ -118,14 +118,14 @@ body{
 .single_content_inner{
     margin: 50px 400px;
 }
-.post_item{
+.single_content_inner .post_item{
     color: #ddd;
     font-size: 20px;
     font-weight: bold;
     padding: 5px;
     border: #807f7f 1px solid;
 }
-.post_item a{
+.single_content_inner .post_item a{
     text-decoration: none;
     color: inherit;
 }
