@@ -20,8 +20,9 @@ body {
 a { color: inherit; text-decoration: none; }
 .site-header, .container, .site-footer { width: min(calc(100% - 80px), var(--max-width)); margin-inline: auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: 46px 0 0; }
-.brand { display: inline-flex; align-items: center; gap: 16px; font-weight: 700; font-size: 27px; letter-spacing: -1.5px; }
-.brand span { width: 18px; height: 18px; background: var(--accent); display: inline-block; }
+.brand { display: inline-flex; align-items: center; gap: 18px; color: #7d0000; font-weight: 800; font-size: 27px; letter-spacing: -1.5px; }
+.brand-duck { display: block; width: 54px; height: 42px; object-fit: contain; }
+.brand-name { display: inline-block; }
 nav { display: flex; gap: 42px; font-size: 18px; }
 nav a:hover { color: var(--accent); }
 .container { min-height: calc(100vh - 166px); padding: 104px 0 90px; }
@@ -66,8 +67,8 @@ nav a:hover { color: var(--accent); }
 @media (max-width: 720px) {
   .site-header, .container, .site-footer { width: min(calc(100% - 40px), var(--max-width)); }
   .site-header { padding-top: 28px; }
-  .brand { gap: 10px; font-size: 22px; }
-  .brand span { width: 13px; height: 13px; }
+  .brand { gap: 11px; font-size: 22px; }
+  .brand-duck { width: 42px; height: 33px; }
   nav { gap: 20px; font-size: 15px; }
   .container { padding-top: 82px; }
   .hero-title { margin-bottom: 82px; letter-spacing: -4px; }
