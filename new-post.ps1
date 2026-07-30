@@ -11,12 +11,31 @@ $category = Read-Host '분류 (새 분류도 바로 입력 가능)'
 if ([string]::IsNullOrWhiteSpace($category)) { throw '분류는 비워 둘 수 없습니다.' }
 
 Write-Host '본문을 입력하세요. 끝내려면 새 줄에 END만 입력합니다.' -ForegroundColor DarkGray
+Write-Host '코드 블록은 /code 로 시작하고 /endcode 로 끝냅니다.' -ForegroundColor DarkGray
 $lines = [System.Collections.Generic.List[string]]::new()
+$inCodeBlock = $false
 while ($true) {
   $line = Read-Host
   if ($line -eq 'END') { break }
+
+  if ($line -eq '/code') {
+    if ($inCodeBlock) { throw '이미 코드 블록 안입니다. /endcode 를 먼저 입력하세요.' }
+    $lines.Add('```')
+    $inCodeBlock = $true
+    continue
+  }
+
+  if ($line -eq '/endcode') {
+    if (-not $inCodeBlock) { throw '열린 코드 블록이 없습니다. /code 를 먼저 입력하세요.' }
+    $lines.Add('```')
+    $inCodeBlock = $false
+    continue
+  }
+
   $lines.Add($line)
 }
+
+if ($inCodeBlock) { throw '코드 블록이 닫히지 않았습니다. /endcode 를 입력한 뒤 다시 저장하세요.' }
 
 $idBase = ($title.ToLowerInvariant() -replace '[^a-z0-9가-힣]+', '-') -replace '(^-|-$)', ''
 if ([string]::IsNullOrWhiteSpace($idBase)) { $idBase = 'post' }
