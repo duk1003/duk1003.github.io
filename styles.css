@@ -47,7 +47,7 @@ nav a:hover { color: var(--accent); }
 .category-posts a { font: 600 19px "Noto Sans KR", sans-serif; }
 .category-posts a:hover { color: var(--accent); }
 .empty { padding: 64px 12px; color: var(--muted); border-bottom: 1px solid var(--line); }
-.article { max-width: 790px; }
+.article { max-width: 920px; margin-inline: auto; }
 .back-link { display: inline-block; margin-bottom: 66px; color: var(--muted); font-size: 16px; }
 .back-link:hover { color: var(--accent); }
 .article-meta { margin: 0 0 20px; color: var(--accent); font: 600 16px "Noto Sans KR", sans-serif; }

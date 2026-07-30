@@ -1,0 +1,34 @@
+name: Build posts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**/*.txt'
+      - 'scripts/build-posts.ps1'
+      - '.github/workflows/build-posts.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build posts.json
+        shell: pwsh
+        run: ./scripts/build-posts.ps1
+
+      - name: Commit generated posts
+        shell: bash
+        run: |
+          if git diff --quiet -- posts.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts.json
+          git commit -m "Build posts.json"
+          git push
