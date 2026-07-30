@@ -146,4 +146,8 @@ print(minimum_edit_distance("cat", "cut"))
 print(minimum_edit_distance("intention", "execution"))
 ```
 
+<<<<<<< HEAD
 이 알고리즘은 맞춤법 검사나 문자 오류율 판단에서 유용하게 사용됩니다. 여기까지가 챕터2의 Words and Tokens에 대한 내용이었고, 다음 글에서는 N-gram Language Models에 대해 알아보겠습니다.
+=======
+이 알고리즘은 맞춤법 검사나 문자 오류율 판단에서 유용하게 사용됩니다. 여기까지가 챕터2의 Words and Tokens에 대한 내용이었고, 다음 글에서는 N-gram Language Models에 대해 알아보겠습니다.
+>>>>>>> fa10e918dc11e8f2c0a62a7d3b572b4059860675
