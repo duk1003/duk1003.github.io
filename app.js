@@ -32,7 +32,6 @@ function renderHome(active = 'latest') {
     ? `<ul class="post-list">${postRows(latest)}</ul>`
     : renderCategories(latest);
   app.innerHTML = `
-    <h1 class="hero-title">redduk.log</h1>
     <div class="tabs" role="tablist" aria-label="글 보기 방식">
       <button class="tab" role="tab" aria-selected="${active === 'latest'}" data-tab="latest">최신순</button>
       <button class="tab" role="tab" aria-selected="${active === 'category'}" data-tab="category">분류별</button>

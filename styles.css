@@ -20,24 +20,24 @@ body {
 a { color: inherit; text-decoration: none; }
 .site-header, .container, .site-footer { width: min(calc(100% - 80px), var(--max-width)); margin-inline: auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: 46px 0 0; }
-.brand { display: inline-flex; align-items: center; gap: 16px; font-weight: 700; font-size: 27px; letter-spacing: -1.5px; }
-.brand span { width: 18px; height: 18px; background: var(--accent); display: inline-block; }
-nav { display: flex; gap: 42px; font-size: 18px; }
+.brand { display: inline-flex; align-items: center; gap: 18px; color: #7d0000; font-weight: 800; font-size: 24px; letter-spacing: -1.3px; }
+.brand-duck { display: block; width: 54px; height: 42px; object-fit: contain; }
+.brand-name { display: inline-block; }
+nav { display: flex; gap: 38px; font-size: 16px; }
 nav a:hover { color: var(--accent); }
-.container { min-height: calc(100vh - 166px); padding: 104px 0 90px; }
-.hero-title { margin: 0 0 112px; font-size: clamp(72px, 10.6vw, 154px); line-height: .9; letter-spacing: -8px; font-weight: 800; }
+.container { min-height: calc(100vh - 166px); padding: 72px 0 90px; }
 .tabs { display: flex; gap: 56px; border-bottom: 1px solid var(--line); }
-.tab { appearance: none; border: 0; border-bottom: 4px solid transparent; background: transparent; padding: 0 20px 25px; margin-bottom: -1px; font: 700 26px "Noto Sans KR", sans-serif; color: var(--muted); cursor: pointer; }
+.tab { appearance: none; border: 0; border-bottom: 4px solid transparent; background: transparent; padding: 0 16px 21px; margin-bottom: -1px; font: 700 22px "Noto Sans KR", sans-serif; color: var(--muted); cursor: pointer; }
 .tab:first-child { padding-left: 20px; }
 .tab[aria-selected="true"] { color: var(--ink); border-color: var(--accent); }
 .tab:hover { color: var(--ink); }
 .post-list { list-style: none; padding: 0; margin: 0; }
-.post-card { display: grid; grid-template-columns: 170px 175px 1fr 44px; align-items: center; gap: 16px; padding: 48px 12px; border-bottom: 1px solid var(--line); }
+.post-card { display: grid; grid-template-columns: 155px 160px 1fr 44px; align-items: center; gap: 16px; padding: 40px 12px; border-bottom: 1px solid var(--line); }
 .post-card:hover .post-title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
-.category { font: 600 21px "Noto Sans KR", sans-serif; }
+.category { font: 600 19px "Noto Sans KR", sans-serif; }
 .post-card:first-child .category { color: var(--accent); }
-.date, .post-number { color: var(--muted); font-size: 18px; }
-.post-title { font: 700 28px "Noto Sans KR", sans-serif; letter-spacing: -1.2px; }
+.date, .post-number { color: var(--muted); font-size: 16px; }
+.post-title { font: 700 25px "Noto Sans KR", sans-serif; letter-spacing: -1px; }
 .post-number { text-align: right; font-family: "DM Mono", monospace; }
 .category-groups { border-top: 1px solid var(--line); }
 .category-group { border-bottom: 1px solid var(--line); padding: 33px 12px; }
@@ -66,17 +66,16 @@ nav a:hover { color: var(--accent); }
 @media (max-width: 720px) {
   .site-header, .container, .site-footer { width: min(calc(100% - 40px), var(--max-width)); }
   .site-header { padding-top: 28px; }
-  .brand { gap: 10px; font-size: 22px; }
-  .brand span { width: 13px; height: 13px; }
-  nav { gap: 20px; font-size: 15px; }
-  .container { padding-top: 82px; }
-  .hero-title { margin-bottom: 82px; letter-spacing: -4px; }
+  .brand { gap: 11px; font-size: 20px; }
+  .brand-duck { width: 42px; height: 33px; }
+  nav { gap: 20px; font-size: 14px; }
+  .container { padding-top: 54px; }
   .tabs { gap: 22px; }
-  .tab { padding: 0 8px 18px; font-size: 21px; }
+  .tab { padding: 0 8px 17px; font-size: 19px; }
   .post-card { grid-template-columns: 1fr auto; gap: 9px; padding: 28px 0; }
   .category { font-size: 15px; }
   .date { font-size: 14px; text-align: right; }
-  .post-title { grid-column: 1 / -1; font-size: 21px; letter-spacing: -.8px; }
+  .post-title { grid-column: 1 / -1; font-size: 19px; letter-spacing: -.7px; }
   .post-number { display: none; }
   .article h1 { letter-spacing: -2px; }
   .article-body { font-size: 16px; }
