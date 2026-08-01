@@ -1,7 +1,7 @@
-title: NLP 1. Words and Tokens
+title: NLP 2. N-gram Language Models
 category: NLP
-date: 2026-07-30
-id: nlp-1-words-and-tokens-20260730141715
+date: 2026-08-01
+id: nlp-2-N-gram-Language-Models-20260801130022
 
 ---
 
