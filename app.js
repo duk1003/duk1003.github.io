@@ -7,12 +7,23 @@ const sortedPosts = () => [...posts].sort((a, b) => new Date(b.date) - new Date(
 
 function markdownToHtml(source) {
   const escaped = escapeHtml(source || '');
-  const fenced = escaped.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
+  const fenced = escaped.replace(/```([^\n]*)\n([\s\S]*?)```/g, (_, language, code) => {
+    if (language.trim().toLowerCase() === 'math') {
+      return `<div class="math-display">\\[${code.trim()}\\]</div>`;
+    }
+    return `<pre><code>${code.trim()}</code></pre>`;
+  });
   return fenced.split(/\n\n+/).map(block => {
-    if (block.startsWith('<pre>')) return block;
+    if (block.startsWith('<pre>') || block.startsWith('<div class="math-display">')) return block;
     if (block.startsWith('## ')) return `<h2>${block.slice(3)}</h2>`;
     return `<p>${block.replace(/\n/g, '<br>')}</p>`;
   }).join('');
+}
+
+function typesetMath() {
+  if (!window.MathJax?.typesetPromise) return;
+  window.MathJax.typesetClear([app]);
+  window.MathJax.typesetPromise([app]).catch(error => console.error('MathJax typesetting failed:', error));
 }
 
 function postRows(items) {
@@ -59,6 +70,7 @@ function renderPost(id) {
     <time class="article-date" datetime="${post.date}">${formatDate(post.date)}</time>
     <div class="article-body">${markdownToHtml(post.body)}</div>
   </article>`;
+  typesetMath();
 }
 
 function renderRoute() {
@@ -77,4 +89,5 @@ fetch('posts.json')
   .catch(error => { app.innerHTML = `<p class="empty">${escapeHtml(error.message)}</p>`; });
 
 window.addEventListener('hashchange', renderRoute);
+document.addEventListener('mathjax-ready', typesetMath);
 document.querySelector('#year').textContent = new Date().getFullYear();

@@ -25,6 +25,22 @@
     <main id="app" class="container" tabindex="-1"></main>
 
     <footer class="site-footer">© <span id="year"></span> redduk.log</footer>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        startup: {
+          typeset: false,
+          ready() {
+            MathJax.startup.defaultReady();
+            document.dispatchEvent(new Event('mathjax-ready'));
+          }
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
