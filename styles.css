@@ -58,6 +58,8 @@ nav a:hover { color: var(--accent); }
 .article-body h2 { margin: 60px 0 20px; font-size: 29px; line-height: 1.4; }
 .article-body pre { overflow: auto; margin: 32px 0; padding: 24px; background: var(--code); color: #eaeaea; border-radius: 4px; font: 14px/1.7 "DM Mono", monospace; }
 .article-body code { font-family: "DM Mono", monospace; }
+.article-body .math-display { overflow-x: auto; margin: 32px 0; padding: 16px 24px; background: #f0f0f0; border-radius: 4px; }
+.article-body .math-display mjx-container[display="true"] { margin: 0; }
 .about { max-width: 640px; }
 .about h1 { font-size: 58px; letter-spacing: -3px; margin: 0 0 30px; }
 .about p { color: var(--muted); font: 18px/1.9 "Noto Sans KR", sans-serif; }

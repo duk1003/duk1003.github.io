@@ -6,24 +6,52 @@ const formatDate = (value) => value.replaceAll('-', '.');
 const sortedPosts = () => [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
 
 function markdownToHtml(source) {
-  const escaped = escapeHtml(source || '');
-  const fenced = escaped.replace(/```([^\n]*)\n([\s\S]*?)```/g, (_, language, code) => {
-    if (language.trim().toLowerCase() === 'math') {
-      return `<div class="math-display">\\[${code.trim()}\\]</div>`;
+  const text = (source || '').replace(/\r\n?/g, '\n');
+  // Extract code and math before adding paragraph/line-break markup.
+  const tokens = /^[ \t]*(`{3,}|~{3,})([^\n]*)\n([\s\S]*?)^[ \t]*\1[ \t]*(?=\n|$)|\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|(?<!\\)\$(?!\$)(?:\\.|[^$\n])+?\$/gm;
+  let html = '';
+  let paragraph = '';
+  let offset = 0;
+  const flush = () => {
+    html += paragraph.split(/\n\s*\n/).filter(block => block.trim()).map(block => {
+      block = block.trim();
+      if (block.startsWith('## ')) return `<h2>${block.slice(3)}</h2>`;
+      return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+    }).join('');
+    paragraph = '';
+  };
+  for (const match of text.matchAll(tokens)) {
+    paragraph += escapeHtml(text.slice(offset, match.index));
+    const [raw, fence, language, code] = match;
+    if (fence) {
+      flush();
+      if (/^(math|latex|tex)$/i.test(language.trim())) {
+        const formula = code.trim().replace(/^(?:\$\$([\s\S]*)\$\$|\\\[([\s\S]*)\\\])$/, (_, dollars, brackets) => dollars ?? brackets);
+        html += `<div class="math-display">\\[${escapeHtml(formula)}\\]</div>`;
+      } else {
+        html += `<pre><code>${escapeHtml(code.replace(/\n$/, ''))}</code></pre>`;
+      }
+    } else if (raw.startsWith('$$') || raw.startsWith('\\[')) {
+      flush();
+      html += `<div class="math-display">${escapeHtml(raw)}</div>`;
+    } else {
+      paragraph += `<span class="math-inline">${escapeHtml(raw).replace(/\n/g, ' ')}</span>`;
     }
-    return `<pre><code>${code.trim()}</code></pre>`;
-  });
-  return fenced.split(/\n\n+/).map(block => {
-    if (block.startsWith('<pre>') || block.startsWith('<div class="math-display">')) return block;
-    if (block.startsWith('## ')) return `<h2>${block.slice(3)}</h2>`;
-    return `<p>${block.replace(/\n/g, '<br>')}</p>`;
-  }).join('');
+    offset = match.index + raw.length;
+  }
+  paragraph += escapeHtml(text.slice(offset));
+  flush();
+  return html;
 }
 
 function typesetMath() {
   if (!window.MathJax?.typesetPromise) return;
-  window.MathJax.typesetClear([app]);
-  window.MathJax.typesetPromise([app]).catch(error => console.error('MathJax typesetting failed:', error));
+  window.MathJax.startup.promise = window.MathJax.startup.promise
+    .then(() => {
+      window.MathJax.typesetClear([app]);
+      return window.MathJax.typesetPromise([app]);
+    })
+    .catch(error => console.error('MathJax typesetting failed:', error));
 }
 
 function postRows(items) {
